@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'DjangoUeditor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -96,8 +97,13 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
+LANGUAGES = (
+    ('en', ('English')),
+    ('zh-hans', ('中文简体')),
+    ('zh-hant', ('中文繁體')),
+)
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -111,3 +117,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 添加静态文件配置
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "common_static"),
+)
+# 添加文件上传目录
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
