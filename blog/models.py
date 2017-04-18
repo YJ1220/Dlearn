@@ -1,6 +1,8 @@
 #-*-coding: utf-8-*-
 from django.db import models
 from DjangoUeditor.models import UEditorField
+# 生成相关的网址
+from django.core.urlresolvers import reverse
 
 # Create your models here.
 class Column(models.Model):
@@ -8,8 +10,17 @@ class Column(models.Model):
     slug = models.CharField('栏目网址', max_length=256, db_index=True)
     intro = models.TextField('栏目简介', default='')
 
+    nav_display = models.BooleanField('导航显示', default=False)
+    home_display = models.BooleanField('首页显示', default=False)
+
+
+
+
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse('column', args=(self.slug,))
 
     class Meta:
         verbose_name = '栏目'
@@ -20,7 +31,7 @@ class Article(models.Model):
     column = models.ManyToManyField(Column, verbose_name='归属栏目')
 
     title = models.CharField('标题', max_length=256)
-    slug = models.CharField('网址', max_length=256, db_index=True)
+    slug = models.CharField('网址', max_length=250, unique=True)
 
     author = models.ForeignKey('auth.User', blank=True, null=True, verbose_name='作者')
 
@@ -35,6 +46,9 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('article', args=(self.slug,))
 
     class Meta:
         verbose_name = '教程'
