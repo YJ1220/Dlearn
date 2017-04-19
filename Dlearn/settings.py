@@ -25,7 +25,7 @@ SECRET_KEY = 'd2)*l%!2h65qr7)y(v_kdqoeia$eo@))0x+ijj9dk=ijh_g3c0'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog',
+    'DjangoUeditor',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,7 +57,9 @@ ROOT_URLCONF = 'Dlearn.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        # 'DIRS': [],
+        # 添加项目templates文件夹
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -64,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'blog.nav_processor.nav_column',
             ],
         },
     },
@@ -103,8 +107,6 @@ LANGUAGES = (
     ('zh-hans', ('中文简体')),
     ('zh-hant', ('中文繁體')),
 )
-
-
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -118,3 +120,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# 添加静态文件配置
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "common_static"),
+)
+# 添加文件上传目录
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
