@@ -21,8 +21,8 @@ from django.conf import settings
 urlpatterns = [
     url(r'^$', 'blog.views.index', name='index'),
     url(r'^column/(?P<column_slug>[^/]+)/$', 'blog.views.column_detail', name='column'),
-    # url(r'^news/(?P<article_slug>[^/]+)/$', 'blog.views.article_detail', name='article'),
-    url(r'^news/(?P<pk>\d+)/(?P<article_slug>[^/]+)/$', 'blog.views.article_detail', name='article'),
+    # url(r'^blog/(?P<article_slug>[^/]+)/$', 'blog.views.article_detail', name='article'),
+    url(r'^blog/(?P<pk>\d+)/(?P<article_slug>[^/]+)/$', 'blog.views.article_detail', name='article'),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^ueditor/', include(DjangoUeditor_urls)),
 ]
